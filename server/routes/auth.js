@@ -25,14 +25,19 @@ router.post("/register", async (req, res) => {
 })
 
 router.post("/login", async (req, res) => {
-    const { email, password } = req.body;
-    if (!email || !password) return res.status(409).json({ error: "give all input filed data" });
-    const userExist = await User.findOne({ email: email.toLowerCase() })
-    if (!userExist) return res.status(401).json({ error: "Invalid Credentails" });
-    const isMatch = await bcrypt.compare(password, userExist.passwordHash);
-    if (!isMatch) return res.status(401).json({ error: "Invalid Credentails" });
-    const token = jwt.sign({ userId: userExist._id, email: userExist.email }, process.env.JWT_SECRET, { expiresIn: '1d' });
-    res.status(200).json({ message: "Login Successfull", token, user: userExist })
+    try {
+        const { email, password } = req.body;
+        if (!email || !password) return res.status(409).json({ error: "give all input filed data" });
+        const userExist = await User.findOne({ email: email.toLowerCase() })
+        if (!userExist) return res.status(401).json({ error: "Invalid Credentails" });
+        const isMatch = await bcrypt.compare(password, userExist.passwordHash);
+        if (!isMatch) return res.status(401).json({ error: "Invalid Credentails" });
+        const token = jwt.sign({ userId: userExist._id, email: userExist.email }, process.env.JWT_SECRET, { expiresIn: '1d' });
+        res.status(200).json({ message: "Login Successfull", token, user: userExist })
+    } catch (error) {
+        console.log(error);
+        throw new Error("500 error in login routes")
+    }
 
 
 })
