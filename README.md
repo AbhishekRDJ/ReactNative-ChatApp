@@ -1,5 +1,7 @@
 # Chat App (React Native + Node.js + Socket.IO)
-
+<p align="center">
+  <video src="https://github.com/AbhishekRDJ/ReactNative-ChatApp/raw/main/my-expo-app/assets/demo.mp4" controls width="400"></video>
+</p>
 A real-time 1:1 chat application built with React Native (Expo) frontend and Node.js (Express + Socket.IO) backend. Features include JWT authentication, real-time messaging with Socket.IO, message persistence in MongoDB, typing indicators, online status, and read receipts.
 
 ## Features
