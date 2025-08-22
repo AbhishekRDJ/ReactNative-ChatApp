@@ -25,4 +25,47 @@ router.get('/:id/messages', auth, async (req, res) => {
     }
 });
 
+router.get('/with/:userId', auth, async (req, res) => {
+    try {
+        const otherIdRaw = req.params.userId;
+        const myIdRaw = req.user.id;
+
+        if (!otherIdRaw) return res.status(400).json({ error: 'other user id required' });
+        if (otherIdRaw === myIdRaw) return res.status(400).json({ error: 'cannot create conversation with self' });
+
+        // cast to ObjectId
+        let myId, otherId;
+        try {
+            myId = new mongoose.Types.ObjectId(myIdRaw);
+            otherId = new mongoose.Types.ObjectId(otherIdRaw);
+        } catch (err) {
+            return res.status(400).json({ error: 'invalid user id format' });
+        }
+
+        // 1) try find
+        let convo = await Conversation.findOne({ participants: { $all: [myId, otherId] } });
+
+        // 2) if missing, create and handle race
+        if (!convo) {
+            try {
+                convo = await Conversation.create({
+                    participants: [myId, otherId],
+                    lastMessage: '',
+                    lastMessageAt: new Date()
+                });
+            } catch (createErr) {
+                // if race or duplicate, try to find again
+                convo = await Conversation.findOne({ participants: { $all: [myId, otherId] } });
+                if (!convo) throw createErr; // propagate unexpected error
+            }
+        }
+
+        return res.json({ conversation: convo });
+    } catch (err) {
+        console.error('GET /conversations/with/:userId error:', err);
+        return res.status(500).json({ error: 'Server error' });
+    }
+});
+
+
 export default router;
