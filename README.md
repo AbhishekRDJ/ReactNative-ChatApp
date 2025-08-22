@@ -1,13 +1,13 @@
 # Chat App (React Native + Node.js + Socket.IO)
 
 <p align="center">
-  <video src="https://raw.githubusercontent.com/AbhishekRDJ/ReactNative-ChatApp/main/public/demo.mp4" controls width="600"></video>
+  <a href="https://drive.google.com/file/d/11v_fxL7t1D_jjhYGChM1t8ASW7OVx-a5/view?usp=sharing" target="_blank">
+    <button style="padding:10px 20px; background-color:#4CAF50; color:white; border:none; border-radius:5px; cursor:pointer; font-size:16px;">
+      # Watch Demo Video
+    </button>
+  </a>
 </p>
 
-![pages Preview](https://raw.githubusercontent.com/AbhishekRDJ/ReactNative-ChatApp/main/public/1.png)
-![pages Preview](https://raw.githubusercontent.com/AbhishekRDJ/ReactNative-ChatApp/main/public/2.png)
-![pages Preview](https://raw.githubusercontent.com/AbhishekRDJ/ReactNative-ChatApp/main/public/3.png)
-![pages Preview](https://raw.githubusercontent.com/AbhishekRDJ/ReactNative-ChatApp/main/public/4.png)
 
 A real-time 1:1 chat application built with React Native (Expo) frontend and Node.js (Express + Socket.IO) backend. Features include JWT authentication, real-time messaging with Socket.IO, message persistence in MongoDB, typing indicators, online status, and read receipts.
 
