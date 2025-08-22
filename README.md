@@ -11,6 +11,10 @@
 
 A real-time 1:1 chat application built with React Native (Expo) frontend and Node.js (Express + Socket.IO) backend. Features include JWT authentication, real-time messaging with Socket.IO, message persistence in MongoDB, typing indicators, online status, and read receipts.
 
+# sample users: 
+## email:abhisheksangule6@gmail.com
+## Password: Pass@123
+
 ## Features
 
 - ✅ JWT Authentication (login/register)
